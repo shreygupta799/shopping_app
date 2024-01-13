@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_app/global_variable.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app/cart_provider.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({super.key});
 
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
   @override //check
   Widget build(BuildContext context) {
+    final cart = Provider.of<CartProvider>(context).cart;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -31,9 +38,15 @@ class CartPage extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Text('Size: ${cartItem['sizes']}'),
-                trailing: Icon(
-                  Icons.delete,
-                  color: Colors.red,
+                trailing: GestureDetector(
+                  onTap: () {
+                    Provider.of<CartProvider>(context, listen: false)
+                        .removeProduct(cart[index]);
+                  },
+                  child: Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                  ),
                 ),
               );
             }),

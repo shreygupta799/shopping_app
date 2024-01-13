@@ -4,7 +4,7 @@ import 'package:shopping_app/global_variable.dart';
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
-  @override
+  @override //check
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
